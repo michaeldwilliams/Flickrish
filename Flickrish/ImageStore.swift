@@ -28,7 +28,7 @@ class ImageStore {
     
     let session = URLSession.shared
 
-    
+    // makes a netword request to get the data from the given URL
     func fetchImageJSON(completion: @escaping (Result) -> Void) {
         guard let url = URL(string: FlickrService.url) else {return}
         let request = URLRequest(url: url)
@@ -41,11 +41,14 @@ class ImageStore {
         task.resume()
     }
     
+    
     private func processImageJSON(data:Data?, error:Error?) -> Result {
         guard let jsonData = data else {return .failure(error!)}
         return FlickrService.parseImages(fromJSON: jsonData)
     }
-        
+    
+    
+    
     func fetchImage(for image: Image, completion: @escaping (ImageResult) -> Void) {
         let imageURL = image.imageURL
         let request = URLRequest(url: imageURL)

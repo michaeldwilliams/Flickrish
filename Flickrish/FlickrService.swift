@@ -17,6 +17,7 @@ struct FlickrService {
     
     static let url = "https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=a6d819499131071f158fd740860a5a88&extras=url_h%2Curl_t&format=json&nojsoncallback=1"
 
+    // Using the JSON to return an array of Image(s)
     static func parseImages(fromJSON data:Data) -> Result {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
@@ -27,7 +28,6 @@ struct FlickrService {
                 else {
                     return .failure(ServiceError.invalidJSONData)
             }
-            
             var imageOutput = [Image]()
             for imageDict in imagesArray {
                 if let image = parseImageData(from: imageDict) {
@@ -40,8 +40,8 @@ struct FlickrService {
             return .failure(error)
         }
     }
-
     
+    // Parse the larger data-filled collection into just the necessary parts  
     private static func parseImageData(from dictionary:[String:Any]) -> Image? {
         guard
             let title = dictionary["title"] as? String,
