@@ -13,10 +13,10 @@ class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    func update(with image: UIImage?) {
-        if let imageToDisplay = image {
+    func updateImageView(with image: UIImage?) {
+        if let _image = image {
             activityIndicator.stopAnimating()
-            imageView.image = imageToDisplay
+            imageView.image = _image
         } else {
             activityIndicator.startAnimating()
             imageView.image = nil
@@ -25,11 +25,11 @@ class ImageCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        update(with: nil)
+        updateImageView(with: nil)
     }
     override func prepareForReuse() {
         super.prepareForReuse()
-        update(with: nil)
+        updateImageView(with: nil)
     }
     
 }

@@ -73,7 +73,7 @@ class ImagesCollectionViewController: UICollectionViewController {
             }
             let photoIndexPath = IndexPath(item: photoIndex, section: 0)
             if let cell = self.collectionView?.cellForItem(at: photoIndexPath) as? ImageCollectionViewCell {
-                cell.update(with: image)
+                cell.updateImageView(with: image)
         }
     } }
     
