@@ -17,7 +17,7 @@ class ImagesCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        store.fetchImages { (result) in
+        store.fetchImageJSON { (result) in
             switch result {
             case let .success(images):
                 self.images = images
@@ -61,6 +61,9 @@ class ImagesCollectionViewController: UICollectionViewController {
         return cell
     }
 
+    
+    // MARK: UICollectionViewDelegate
+    
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let photo = self.images[indexPath.row]
         store.fetchImage(for: photo) { (result) -> Void in

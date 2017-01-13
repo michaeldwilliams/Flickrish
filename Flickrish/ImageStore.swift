@@ -26,13 +26,10 @@ enum Result {
 class ImageStore {
     
     
-    private let session:URLSession = {
-        let configuration = URLSessionConfiguration.default
-        return URLSession(configuration: configuration)
-    }()
+    let session = URLSession.shared
 
     
-    func fetchImages(completion: @escaping (Result) -> Void) {
+    func fetchImageJSON(completion: @escaping (Result) -> Void) {
         guard let url = URL(string: FlickrService.url) else {return}
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) { (data, response, error) in
